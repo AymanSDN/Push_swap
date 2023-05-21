@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   instractions.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: asaadane <asaadane@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/19 16:22:22 by asaadane          #+#    #+#             */
+/*   Updated: 2023/05/19 16:22:23 by asaadane         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 int ft_count_stack(int *stack)
@@ -10,49 +22,49 @@ int ft_count_stack(int *stack)
 	return(i);
 }
 
-void pa(t_stack stack, t_size size)
+void pa(t_stack *stack, t_size *size)
 {
 	int i;
 	int position_a;
 
 	i = 0;
-	position_a = size.A;
+	position_a = size->A;
 	while (position_a >= 0)
 	{
-		stack.A[position_a + 1] = stack.A[position_a];
+		stack->A[position_a + 1] = stack->A[position_a];
 		position_a--;
 	}
-	size.A--;
-	stack.A[0] = stack.B[0];
-	while(stack.B[i])
+	stack->A[0] = stack->B[0];
+	while(i < size->B)
 	{
-		stack.B[i] = stack.B[i + 1];
+		stack->B[i] = stack->B[i + 1];
 		i++;
 	}
-	size.B++;
+	size->B--;
+	size->A++;
 	write(1, "pa\n", 3);
 }
 
-void pb(t_stack stack, t_size size)
+void pb(t_stack *stack, t_size *size)
 {
 	int i;
 	int position_b;
 
 	i = 0;
-	position_b = size.B;
+	position_b = size->B;
+	size->B++;
 	while (position_b >= 0)
 	{
-		stack.B[position_b + 1] = stack.B[position_b];
+		stack->B[position_b] = stack->B[position_b - 1];
 		position_b--;
-	}
-	size.B++;
-	stack.B[0] = stack.A[0];
-	while(stack.A[i])
+	} 
+	stack->B[0] = stack->A[0];
+	while(i < size->A)
 	{
-		stack.A[i] = stack.A[i + 1];
+		stack->A[i] = stack->A[i + 1];
 		i++;
 	}
-	size.A--;
+	size->A--;
 	write(1, "pb\n", 3);
 }
 
@@ -77,6 +89,7 @@ void sb(int *stack_b, int p)
 	if (p == 1)
 		write(1, "sb\n", 3);
 }
+
 void ss(int *stack_a, int *stack_b)
 {
 	sa(stack_a, 0);
@@ -141,6 +154,7 @@ void rra(int *stack_a, int size_a, int p)
 	if (p == 1)
 		write(1, "rra\n", 4);
 }
+
 void rrb(int *stack_b, int size_a, int p)
 {
 	int	i;

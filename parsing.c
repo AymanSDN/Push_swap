@@ -1,10 +1,38 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: asaadane <asaadane@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/19 16:22:28 by asaadane          #+#    #+#             */
+/*   Updated: 2023/05/21 01:12:50 by asaadane         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
-#include <string.h>
 
 
 int	ft_isdigit(int c)
 {
-	return (c >= '0' && c <= '9');
+	if(c >= '0' && c <= '9')
+	{
+		return (1);
+	}
+	return(0);
+}
+
+int ft_count(char **splited)
+{
+	int i;
+
+	i = 0;
+	while (splited[i])
+	{
+		i++;
+	}
+	return(i);
+	
 }
 
 int ft_check_integers(char **splited, int size_a)
@@ -18,11 +46,14 @@ int ft_check_integers(char **splited, int size_a)
 
     while (*splited != NULL)
 	{
-        const char *arg = *splited;
-        while (*arg != '\0') {
+        char *arg = *splited;
+        while (*arg != '\0')
+		{
+				/* code */
+			
             if (!ft_isdigit(*arg))
 			{
-				write(2, "it must be only integers !!\n", 29);
+				write(2, "Error\n", 7);
                 exit(1);
             }
             arg++;
@@ -43,10 +74,8 @@ void ft_check_duplicate(int *stack_a, int size_a)
 		while (j < size_a) {
 			if (stack_a[i] == stack_a[j])
 			{
-				printf("stack_%d: %d\n", i, stack_a[i]);
-				printf("stack_%d: %d\n", j, stack_a[j]);
-				puts("duplicate found !!");
-				exit(1);
+				write(2, "Error\n", 7);
+                exit(1);
 			}
 			j++;
 		}
@@ -69,23 +98,10 @@ bool ft_check_sorted(int *stack_a, int size_a)
 }
 
 
-int ft_count(char **splited)
-{
-	int i;
-
-	i = 0;
-	while (splited[i])
-	{
-		i++;
-	}
-	return(i);
-	
-}
 
 char** splitArguments(int ac, char **av)
 {
-    // Allocate memory to store split elements
-    char** splited;
+    char **splited;
     int splitedIndex;
     int i;
 	int j;
@@ -98,12 +114,14 @@ char** splitArguments(int ac, char **av)
         char* arg = av[i];
         char* spacePos = strchr(arg, ' ');
 
-        if (spacePos == NULL) {
-            // No space found, store the argument as is
+        if (spacePos == NULL)
+		{
             splited[splitedIndex] = strdup(arg);
             splitedIndex++;
-        } else {
-            // Space found, split the argument using ft_split
+        }
+		else
+		{
+
             char** tokens = ft_split(arg, ' ');
             j = 0;
             while (tokens[j] != NULL) {
@@ -111,7 +129,6 @@ char** splitArguments(int ac, char **av)
                 splitedIndex++;
                 j++;
             }
-            // Free memory allocated by ft_split
             k = 0;
             while (k < j) {
                 free(tokens[k]);
@@ -130,40 +147,41 @@ char** splitArguments(int ac, char **av)
 int main(int ac, char **av) {
 	t_stack stack;
 	t_size size;
+	int *Temp;
 	int i;
 	int j;
 	char **splited;
 	char *arg;
 
-	if (ac < 2)
-	{
-		write(2,"Usage: ./push_swap <list of integers>\n", 39);
-		exit(1);
-	}
-	splited = calloc(sizeof(char*), size.A);
 	splited = splitArguments(ac, av);
 	size.A = ft_count(splited);
-	if (size.A == 1)
+	size.B = 0;
+	if (size.A <= 1)
 	{
-	    write(2,"Usage: ./push_swap <list of integers>\n", 39);
-	    exit(1);
+
+        exit(1);
 	}
 
 	stack.A = malloc(sizeof(int) * size.A);
 	stack.B = malloc(sizeof(int) * size.A);
+	Temp = malloc(sizeof(int) * size.A);
 	ft_check_integers(splited, size.A);
 	i = 0;
 	while(i < size.A)
 	{
+		if (strlen(splited[i]) > 12)
+		{
+			write(2, "Error\n", 7);
+			exit(1);
+		}
 		stack.A[i] = ft_atoi(splited[i]);
+		
+		// printf("temp; %d\n", Temp[i]);
 		i++;
 	}
 	ft_check_duplicate(stack.A, size.A);
 	if (ft_check_sorted(stack.A, size.A))
-	{
-        write(2, "numbers is already sorted !!\n", 30);
-		exit(1);
-	}
+        exit(1);
 	i = 0;
 	puts("	---before---");
 	while(i < size.A)
@@ -172,14 +190,22 @@ int main(int ac, char **av) {
 		i++;
 	}
 	puts("------------------");
-	ft_small_sort(stack, size);
+	// copy_stack(stack, Temp, size);
+	if (size.A <= 5)
+		ft_small_sort(&stack, &size);
+	// else if ( size.A <= 100)
+	// 	// ft_sort_100(&stack, &size);
+	// else
+	// 	puts("hi");
+	// 	ft_sort_500();
 	puts("------------------");
-	i = 0;
 	puts("	---After---");
+	i = 0;
 	while(i < size.A)
 	{
 		printf("stack_A[%d]: %d	|  stack_B[%d]: %d\n", i, stack.A[i], i, stack.B[i]);
 		i++;
 	}
+
 	return 0;
 }

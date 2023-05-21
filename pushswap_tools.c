@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pushswap_tools.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: asaadane <asaadane@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/19 16:22:38 by asaadane          #+#    #+#             */
+/*   Updated: 2023/05/19 16:30:01 by asaadane         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 size_t	ft_strlen(char *s)
@@ -195,7 +207,7 @@ int	ft_atoi(char *str)
 	}
 	else
 	{
-		write(2, "numbers must be between INT_MIN and INT_MAX\n", 45);
+		write(2, "Error\n", 5);
 		exit(1);
 	}
 }
