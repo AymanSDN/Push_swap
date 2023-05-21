@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: asaadane <asaadane@student.42.fr>          +#+  +:+       +#+         #
+#    By: shifuuu <shifuuu@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/19 16:22:26 by asaadane          #+#    #+#              #
-#    Updated: 2023/05/19 16:37:35 by asaadane         ###   ########.fr        #
+#    Updated: 2023/05/21 19:15:13 by shifuuu          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ SRCS			= instractions.c parsing.c pushswap_tools.c small_sort.c big_sort.c
 OBJS			= $(SRCS:.c=.o)
 CC				= cc
 RM				= rm -f
-# CFLAGS			= -Wall -Wextra -Werror
+CFLAGS			= -Wall -Wextra -Werror
 NAME			= push_swap
 
 all:			shifuuu $(NAME)

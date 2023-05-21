@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   instractions.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asaadane <asaadane@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shifuuu <shifuuu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 16:22:22 by asaadane          #+#    #+#             */
-/*   Updated: 2023/05/19 16:22:23 by asaadane         ###   ########.fr       */
+/*   Updated: 2023/05/21 19:24:47 by shifuuu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ void rb(int *stack_b, int p)
 		write(1, "rb\n", 3);
 }
 
-void rr(int *stack_a, int *stack_b, int top_b)
+void rr(int *stack_a, int *stack_b)
 {
 	ra(stack_a, 0);
 	rb(stack_b, 0);
@@ -155,12 +155,12 @@ void rra(int *stack_a, int size_a, int p)
 		write(1, "rra\n", 4);
 }
 
-void rrb(int *stack_b, int size_a, int p)
+void rrb(int *stack_b, int size_b, int p)
 {
 	int	i;
 	int	temp;
 
-	i = size_a - 1;
+	i = size_b - 1;
 	temp = stack_b[i];
 	while (i > 0)
 	{
@@ -172,9 +172,9 @@ void rrb(int *stack_b, int size_a, int p)
 		write(1, "rrb\n", 4);
 }
 
-void rrr(int *stack_a, int *stack_b, int size_a)
+void rrr(int *stack_a, int *stack_b, int size_a, int size_b)
 {
 	rra(stack_a, size_a, 0);
-	rrb(stack_b, size_a, 0);
+	rrb(stack_b, size_b, 0);
 	write(1, "rrr\n", 4);
 }
