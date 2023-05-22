@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shifuuu <shifuuu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asaadane <asaadane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 16:22:28 by asaadane          #+#    #+#             */
-/*   Updated: 2023/05/22 00:39:12 by shifuuu          ###   ########.fr       */
+/*   Updated: 2023/05/22 02:40:47 by asaadane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,27 +39,32 @@ int ft_count(char **splited)
 void ft_check_integers(char **splited)
 {
     char *arg;
+    int i = 0;
+    int j = 0;
 
-    while (*splited != NULL)
+    while (splited[i] != NULL)
     {
-        arg = *splited;
-        if (*arg == '-' || *arg == '+')
+        arg = splited[i];
+        if (arg != NULL)
         {
-            arg++;
-        }
-        while (*arg != '\0')
-        {
-            if (isdigit(*arg))
+            if (arg[j] == '-' || arg[j] == '+')
             {
-                arg++;
+                j++;
             }
-            else
+            while (arg[j] != '\0')
             {
-                write(2, "Error\n", 6);
-                exit(1);
+                if (isdigit(arg[j]))
+                {
+                    j++;
+                }
+                else
+                {
+                    write(2, "must be only integers\n", 23);
+                    exit(1);
+                }
             }
         }
-        splited++;
+        i++;
     }
 }
 
@@ -78,7 +83,8 @@ void ft_check_duplicate(int *stack_a, int size_a)
 		while (j < size_a) {
 			if (stack_a[i] == stack_a[j])
 			{
-				write(2, "Error\n", 7);
+				printf("n1 = %d | n2 = %d\n", stack_a[i], stack_a[j]);
+				write(2, "duplicate found !!\n", 20);
                 exit(1);
 			}
 			j++;
@@ -167,26 +173,24 @@ int main(int ac, char **av) {
 	i = 0;
 	while(i < size.A)
 	{
-		// if (strlen(splited[i]) > 12)
-		// {
-		// 	write(2, "Error\n", 7);
-		// 	exit(1);
-		// }
+		if (strlen(splited[i]) > 12)
+		{
+			write(2, "numbers are already sorted !!\n", 31);
+			exit(1);
+		}
 		stack.A[i] = ft_atoi(splited[i]);
 		i++;
 	}
 	ft_check_duplicate(stack.A, size.A);
 	if (ft_check_sorted(stack.A, size.A))
         exit(1);
+		puts("here");
 	if (size.A <= 5)
 		ft_small_sort(&stack, &size);
 	else if ( size.A <= 100)
 		large_sort(&stack, &size, 5);
-	// else
-	// 	ft_sort_500();
-		for(int i = 0; stack.Temp[i]; i++)
-	{
-		printf("stack_A[%d] = %d  |    Temp[%d] = %d \n", i, stack.A[i], i, stack.Temp[i]);
-	}
+	else
+		large_sort(&stack, &size, 10);
+		
 	return 0;
 }

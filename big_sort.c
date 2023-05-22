@@ -21,7 +21,7 @@ int get_biggest(t_stack *stack, t_size *size)
 	int i;
 	int biggest;
 
-	i = 1;
+	i = 0;
 	biggest = stack->B[0];
 	while (i < size->B)
 	{
@@ -35,16 +35,29 @@ int get_biggest(t_stack *stack, t_size *size)
 }
  int get_biggest_position(t_stack *stack, t_size *size, int biggest)
 {
-	int i = 0;
+	// int i = 0;
 
+	// while (i < size->B)
+	// {
+	// 	if (stack->B[i] == biggest)
+	// 		break;
+
+	// 	i++;
+	// }
+	// 	return i;
+	int i;
+
+	i = 0;
+	biggest = stack->B[0];
 	while (i < size->B)
 	{
-		if (stack->B[i] == biggest)
-			break;
-
+		if (biggest < stack->B[i])
+		{
+			biggest = stack->B[i];
+		}
 		i++;
 	}
-		return i;
+	return (i);
 }
 
 
@@ -102,22 +115,22 @@ void large_sort(t_stack *stack, t_size *size, int num)
 	int position;
 	
 	i = 0;
-	int j = 0;
-	x1 = ((size->A / num) + ((size->A +1) % num));
+
+	x1 = ((size->A / num) + (size->A % num));
 	x2 = x1 / 2;
 	stack->Temp = copy_stack(stack->A, size->A);
 	sort_stack(stack->Temp, size->A);
-	while (j < size->A)
+	while (size->A)
 	{
 		i = chanks(stack, size, x1, x2, i);
 		if (i >= x1)
 		{
+			stack->Temp = copy_stack(stack->A, size->A);
 			sort_stack(stack->Temp, num);
 			x1 = (size->A / num) ; 
 			x2 = x1 / 2;
 			i = 0;
 		}
-		j++;
 	}
 	while (size->B > 0)
 	{
