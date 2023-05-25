@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   small_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shifuuu <shifuuu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asaadane <asaadane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 16:22:41 by asaadane          #+#    #+#             */
-/*   Updated: 2023/05/21 19:14:05 by shifuuu          ###   ########.fr       */
+/*   Updated: 2023/05/25 20:50:25 by asaadane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void small_to_top(int *stack, int size)
     }
 	while(position)
 	{
-		if (position > size / 2)
+		puts("here");
+		if (position / size / 2)
         {
             while (smallest != stack[0])
             {
@@ -41,7 +42,7 @@ void small_to_top(int *stack, int size)
         {
             while (smallest != stack[0])
             {
-                rb(stack, 1);
+                rb(stack, size, 1);
             }
         }
 		position--;
@@ -50,7 +51,6 @@ void small_to_top(int *stack, int size)
 }
 void ft_sort_3(t_stack *stack, t_size *size)
 {
-	// printf("==\n");
 	//case 1
 	if (stack->A[0] > stack->A[1] && stack->A[1] < stack->A[2] && stack->A[2] > stack->A[0])
 		sa(stack->A, 1);
@@ -62,12 +62,12 @@ void ft_sort_3(t_stack *stack, t_size *size)
 	}
 	//case 3
 	else if (stack->A[0] > stack->A[1] && stack->A[1] < stack->A[2] && stack->A[0] > stack->A[2])
-		ra(stack->A, 1);
+		ra(stack->A, size->A, 1);
 	//case 4
 	else if (stack->A[0] < stack->A[1] && stack->A[1] > stack->A[2] && stack->A[0] < stack->A[2])
 	{
 		sa(stack->A, 1);
-		ra(stack->A, 1);
+		ra(stack->A, size->A, 1);
 	}
 	//case 5
 	else if (stack->A[0] < stack->A[1] && stack->A[1] > stack->A[2] && stack->A[0] > stack->A[2])

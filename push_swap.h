@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shifuuu <shifuuu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asaadane <asaadane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 16:22:36 by asaadane          #+#    #+#             */
-/*   Updated: 2023/05/23 15:28:30 by shifuuu          ###   ########.fr       */
+/*   Updated: 2023/05/25 19:25:55 by asaadane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ void pb(t_stack *stack, t_size *size);
 void sa(int *stack_a, int p);
 void sb(int *stack_b, int p);
 void ss(int *stack_a, int *stack_b);
-void ra(int *stack_a, int p);
-void rb(int *stack_b, int p);
-void rr(int *stack_a, int *stack_b);
+void ra(int *stack_a, int size_a, int p);
+void rb(int *stack_b, int size_b, int p);
+void rr(t_stack *stack, t_size *size);
 void rra(int *stack_a, int size_a, int p);
 void rrb(int *stack_b, int size_b, int p);
 void rrr(int *stack_a, int *stack_b, int size_a, int size_b);

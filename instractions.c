@@ -6,7 +6,7 @@
 /*   By: asaadane <asaadane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 16:22:22 by asaadane          #+#    #+#             */
-/*   Updated: 2023/05/22 01:57:15 by asaadane         ###   ########.fr       */
+/*   Updated: 2023/05/25 19:43:22 by asaadane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void pa(t_stack *stack, t_size *size)
 	int i;
 	int position_a;
 
+	if(!size->B)
+		exit(1);
 	i = 0;
 	position_a = size->A;
 	while (position_a >= 0)
@@ -35,13 +37,14 @@ void pa(t_stack *stack, t_size *size)
 		position_a--;
 	}
 	stack->A[0] = stack->B[0];
+	size->A++;
 	while(i < size->B)
 	{
 		stack->B[i] = stack->B[i + 1];
 		i++;
 	}
 	size->B--;
-	size->A++;
+	
 	write(1, "pa\n", 3);
 }
 
@@ -50,21 +53,23 @@ void pb(t_stack *stack, t_size *size)
 	int i;
 	int position_b;
 
+	if(!size->A)
+		exit(1);
 	i = 0;
 	position_b = size->B;
-	size->B++;
 	while (position_b >= 0)
 	{
-		stack->B[position_b] = stack->B[position_b - 1];
+		stack->B[position_b + 1] = stack->B[position_b];
 		position_b--;
 	} 
+	size->A--;
 	stack->B[0] = stack->A[0];
 	while(i < size->A)
 	{
 		stack->A[i] = stack->A[i + 1];
 		i++;
 	}
-	size->A--;
+	size->B++;
 	write(1, "pb\n", 3);
 }
 
@@ -97,14 +102,14 @@ void ss(int *stack_a, int *stack_b)
 	write(1, "ss\n", 3);
 }
 
-void ra(int *stack_a, int p)
+void ra(int *stack_a, int size_a, int p)
 {
 	int i;
 	int temp;
 
-	i = 0;
+	i = 1;
 	temp = stack_a[0];
-	while (stack_a[i])
+	while (i < size_a)
 	{
 		stack_a[i] = stack_a[i + 1];
 		i++;
@@ -114,14 +119,14 @@ void ra(int *stack_a, int p)
 		write(1, "ra\n", 3);
 }
 
-void rb(int *stack_b, int p)
+void rb(int *stack_b, int size_b, int p)
 {
 	int i;
 	int temp;
 
-	i = 0;
+	i = 1;
 	temp = stack_b[0];
-	while (stack_b[i])
+	while (i < size_b)
 	{
 		stack_b[i] = stack_b[i + 1];
 		i++;
@@ -131,10 +136,10 @@ void rb(int *stack_b, int p)
 		write(1, "rb\n", 3);
 }
 
-void rr(int *stack_a, int *stack_b)
+void rr(t_stack *stack, t_size *size)
 {
-	ra(stack_a, 0);
-	rb(stack_b, 0);
+	ra(stack->A, size->A, 0);
+	rb(stack->B, size->B, 0);
 	write(1, "rr\n", 3);
 }
 

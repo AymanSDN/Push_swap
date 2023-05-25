@@ -1,0 +1,18 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug",
+            "program": "/Users/asaadane/Desktop/Push_swap/push_swap",
+            "args": [
+                "55 8 9 566 23 ",
+                "52",
+                "85",
+                " 58 69 59"
+            ],
+            "cwd": "/Users/asaadane/Desktop/Push_swap"
+        }
+    ]
+}

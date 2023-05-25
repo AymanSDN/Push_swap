@@ -6,7 +6,7 @@
 /*   By: asaadane <asaadane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 16:22:38 by asaadane          #+#    #+#             */
-/*   Updated: 2023/05/19 16:30:01 by asaadane         ###   ########.fr       */
+/*   Updated: 2023/05/25 19:08:17 by asaadane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,6 +189,11 @@ int	ft_atoi(char *str)
 
 	result = 0;
 	negative = 1;
+	if (!*str)
+			{
+		write(2, "must be only integers\n", 23);
+		exit(1);
+	}	
 	while (*str == 32 || (*str >= 9 && *str <= 13))
 		str++;
 	if (*str == '-')
@@ -200,6 +205,11 @@ int	ft_atoi(char *str)
 		result = result * 10 + *str - '0';
 		str++;
 	}
+	if (*str)
+	{
+		write(2, "must be only integers\n", 23);
+		exit(1);
+	}	
 	result = result * negative;
 	if (INT_MIN <= result && result <= INT_MAX)
 	{
