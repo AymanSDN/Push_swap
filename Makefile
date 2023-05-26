@@ -1,4 +1,4 @@
-SRCS			= instractions.c parsing.c pushswap_tools.c small_sort.c big_sort.c
+SRCS			= instractions.c parsing.c tools.c small_sort.c large_sort.c
 OBJS			= $(SRCS:.c=.o)
 CC				= cc
 RM				= rm -f

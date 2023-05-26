@@ -79,11 +79,8 @@ int chanks(t_stack *stack, t_size *size , int range, int mid_range, int count)
 {
 	int position;
 	position = get_position(stack, size, stack->A[0]);
-	
-	printf("%d\n", position);exit(0);
 	if (position <= stack->Temp[range])
 	{
-		puts("here2");
 		if (position <= stack->Temp[range - mid_range])
 		{
 			pb(stack, size);
@@ -98,9 +95,9 @@ int chanks(t_stack *stack, t_size *size , int range, int mid_range, int count)
 	}
 	else
 	{
-		puts("here2");
 		ra(stack->A, size->A, 1);
 	}
+	// printf("%d\n", position);
 	return (count);
 }
 
@@ -119,12 +116,7 @@ void large_sort(t_stack *stack, t_size *size, int num)
 	tmp = size->A;
 	stack->Temp = copy_stack(stack->A, size->A);
 	size->A = tmp;
-	printf("Before sorting: ");
-	for(int i = 1; i <size->A; i++){printf("%d ", stack->A[i]);};
 	sort_stack(stack->A, size->A, num);
-	printf("\nAfter sorting: ");
-	for(int i = 1; i <size->A; i++){printf("%d ", stack->A[i]);};
-	
 	while (size->A)
 	{
 		i = chanks(stack, size, range, mid_range, i);
@@ -139,6 +131,7 @@ void large_sort(t_stack *stack, t_size *size, int num)
 	}
 	free(stack->Temp);
 }
+	
 // while (size->B > 0)
 // 	{
 // 		biggest = get_biggest(stack, size);
