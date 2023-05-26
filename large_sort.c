@@ -1,6 +1,3 @@
-
-
-
 #include "push_swap.h"
 
 int *copy_stack(int *stack_a, int size_a)
