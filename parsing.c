@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shifuuu <shifuuu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asaadane <asaadane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 16:22:28 by asaadane          #+#    #+#             */
-/*   Updated: 2023/05/26 10:36:33 by shifuuu          ###   ########.fr       */
+/*   Updated: 2023/05/26 15:44:06 by asaadane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void ft_check_integers(char **splited)
         j = 0;
         while (splited[i][j] != '\0')
         {
-            if(splited[i][j] == '-' || splited[i][j] == '+')
+            if((splited[i][j] == '-' || splited[i][j] == '+') && splited[i][j + 1])
             {
                 j++;
             }
@@ -193,7 +193,8 @@ int main (int ac, char **av)
 	char **splited = NULL;
     
 	splited = splitarguments(av, size);
-	ft_check_integers(splited);
+	// ft_check_integers(splited);
+
 	size->B = 0;
 	if (size->A <= 1)
         exit(0);

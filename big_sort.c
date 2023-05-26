@@ -12,7 +12,10 @@ int *copy_stack(int *stack_a, int size_a)
 
 	temp = malloc(sizeof(int) * size_a);
 	if (!temp)
+	{
+		free(temp);
 		exit(1);
+	}
 	while (i < size_a)
 	{
 		temp[i] = stack_a[i];
@@ -21,34 +24,34 @@ int *copy_stack(int *stack_a, int size_a)
 	return(temp);
 }
 
-int get_biggest(t_stack *stack, t_size *size)
-{
-	int i;
-	int biggest;
+// int get_smallest(t_stack *stack, t_size *size)
+// {
+// 	int i;
+// 	int smallest;
 
-	i = 0;
-	biggest = stack->B[0];
-	while (i < size->B)
-	{
-		if (biggest < stack->B[i])
-		{
-			biggest = stack->B[i];
-		}
-		i++;
-	}
-	return (biggest);
-}
- int get_biggest_position(t_stack *stack, t_size *size, int biggest)
+// 	i = 0;
+// 	smallest = stack->B[0];
+// 	while (i < size->B)
+// 	{
+// 		if (smallest > stack->B[i])
+// 		{
+// 			smallest = stack->B[i];
+// 		}
+// 		i++;
+// 	}
+// 	return (smallest);
+// }
+ int get_position(t_stack *stack, t_size *size, int top)
 {
 	int i = 0;
 
-	while (i < size->B)
+	while (i < size->A)
 	{
-		if (stack->B[i] == biggest)
+		if (stack->Temp[i] == top)
 			break;
 		i++;
 	}
-		return i;
+	return i;
 }
 
 
@@ -75,24 +78,31 @@ void sort_stack(int *stack, int size_a, int num)
     }
 }
 
-int chanks(t_stack *stack, t_size *size , int x1, int x2, int count)
+int chanks(t_stack *stack, t_size *size , int range, int mid_range, int count)
 {
-	if (stack->A[0] <= stack->Temp[x2])
+	int position;
+	position = get_position(stack, size, stack->A[0]);
+	
+	printf("%d\n", position);exit(0);
+	if (position <= stack->Temp[range])
 	{
-		pb(stack, size);
-		if (size->B >= 2)
+		puts("here2");
+		if (position <= stack->Temp[range - mid_range])
+		{
+			pb(stack, size);
+			count++;
+		}
+		else
+		{
+			pb(stack, size);
 			rb(stack->B, size->B, 1);
-		count++;
-	}
-	if (stack->A[0] <= stack->Temp[x1])
-	{
-		pb(stack, size);
-		count++;
+			count++;
+		}
 	}
 	else
 	{
+		puts("here2");
 		ra(stack->A, size->A, 1);
-
 	}
 	return (count);
 }
@@ -100,52 +110,56 @@ int chanks(t_stack *stack, t_size *size , int x1, int x2, int count)
 void large_sort(t_stack *stack, t_size *size, int num)
 {
 	int		i;
-	int		x1;
-	int		x2;
-	int biggest;
-	int position;
+	static int		range;
+	int		mid_range;
+	int		size_range;
 	int tmp;
 	
 	i = 0;
-	x1 = ((size->A / num) + (size->A % num));
-	x2 = x1 / 2;
+	range = (size->A / num) + (size->A % num);
+	size_range = (size->A / num);
+	mid_range = size_range / 2;
 	tmp = size->A;
 	stack->Temp = copy_stack(stack->A, size->A);
 	size->A = tmp;
-
-	sort_stack(stack->Temp, size->A, num);
+	printf("Before sorting: ");
+	for(int i = 1; i <size->A; i++){printf("%d ", stack->A[i]);};
+	sort_stack(stack->A, size->A, num);
+	printf("\nAfter sorting: ");
+	for(int i = 1; i <size->A; i++){printf("%d ", stack->A[i]);};
+	
 	while (size->A)
 	{
-		i = chanks(stack, size, x1, x2, i);
+		i = chanks(stack, size, range, mid_range, i);
 
-		if (i >= x1)
+		if (i >= range)
 		{
 			stack->Temp = copy_stack(stack->A, size->A);
 			sort_stack(stack->Temp, size->A, num);
-			x1 = (size->A / num) ; 
-			x2 = x1 / 2;
+			range += size_range;
 			i = 0;
 		}
 	}
-	while (size->B > 0)
-	{
-		biggest = get_biggest(stack, size);
-		position = get_biggest_position(stack, size, biggest);
-
-		if (position > size->B / 2)
-		{
-			while (biggest != stack->B[0])
-			{
-				rrb(stack->B, size->B, 1);
-			}
-		}
-		else
-		{
-			while (biggest != stack->B[0])
-			{
-				rb(stack->B, size->B, 1);
-			}
-		}
-		pa(stack, size);
-	}
+	free(stack->Temp);
 }
+// while (size->B > 0)
+// 	{
+// 		biggest = get_biggest(stack, size);
+// 		position = get_biggest_position(stack, size, biggest);
+
+// 		if (position > size->B / 2)
+// 		{
+// 			while (biggest != stack->B[0])
+// 			{
+// 				rrb(stack->B, size->B, 1);
+// 			}
+// 		}
+// 		else
+// 		{
+// 			while (biggest != stack->B[0])
+// 			{
+// 				rb(stack->B, size->B, 1);
+// 			}
+// 		}
+// 		pa(stack, size);
+// 	}
