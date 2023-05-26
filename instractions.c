@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   instractions.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asaadane <asaadane@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shifuuu <shifuuu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 16:22:22 by asaadane          #+#    #+#             */
-/*   Updated: 2023/05/25 19:43:22 by asaadane         ###   ########.fr       */
+/*   Updated: 2023/05/26 10:10:29 by shifuuu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,14 +107,14 @@ void ra(int *stack_a, int size_a, int p)
 	int i;
 	int temp;
 
-	i = 1;
+	i = 0;
 	temp = stack_a[0];
 	while (i < size_a)
 	{
 		stack_a[i] = stack_a[i + 1];
 		i++;
 	}
-	stack_a[i - 1] = temp;
+	stack_a[i -1] = temp;
 	if (p == 1)
 		write(1, "ra\n", 3);
 }
@@ -124,7 +124,7 @@ void rb(int *stack_b, int size_b, int p)
 	int i;
 	int temp;
 
-	i = 1;
+	i = 0;
 	temp = stack_b[0];
 	while (i < size_b)
 	{

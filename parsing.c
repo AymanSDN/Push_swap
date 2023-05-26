@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asaadane <asaadane@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shifuuu <shifuuu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 16:22:28 by asaadane          #+#    #+#             */
-/*   Updated: 2023/05/25 19:43:30 by asaadane         ###   ########.fr       */
+/*   Updated: 2023/05/26 10:36:33 by shifuuu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,32 +43,31 @@ void ft_check_integers(char **splited)
 
     while (splited[i])
     {
-        // if(!splited)
-            // puts("bug");
-            j = 0;
-            // printf("%s\n", splited[i]);
-            while (splited[i][j] != '\0')
+        if (splited[i] == NULL)
+        {
+            write(2, "Error\n", 7);
+            exit(1);
+        }
+        j = 0;
+        while (splited[i][j] != '\0')
+        {
+            if(splited[i][j] == '-' || splited[i][j] == '+')
             {
-                if(splited[i][j] == '-' || splited[i][j] == '+')
-                {
-                    j++;
-                }
-                if (isdigit(splited[i][j]))
-                {
-                    j++;
-                }
-                else
-                {
-                    write(2, "must be only integers\n", 23);
-                    exit(1);
-                }
+                j++;
             }
+            if (isdigit(splited[i][j]))
+            {
+                j++;
+            }
+            else
+            {
+                write(2, "must be only integers\n", 23);
+                exit(1);
+            }
+        }
         i++;
     }
 }
-
-
-
 
 
 void ft_check_duplicate(int *stack_a, int size_a)
@@ -107,7 +106,6 @@ bool ft_check_sorted(int *stack_a, int size_a)
 }
 
 
-
 int count_words(char *arg)
 {
     
@@ -118,7 +116,12 @@ int count_words(char *arg)
 
     while (arg[i] != '\0')
     {
-        if (arg[i] == ' ' || arg[i] == '\t' || arg[i] == ',')
+        if (arg[i] == '\0')
+        {
+            write(2, "Error\n", 7);
+            exit(1);
+        }
+        else if (arg[i] == ' ')
         {
             in_word = 0;
         }
@@ -131,8 +134,6 @@ int count_words(char *arg)
     return count;
 }
 
-
-
 char** splitarguments(char **av, t_size *size)
 {
     char **splited;
@@ -141,7 +142,6 @@ char** splitarguments(char **av, t_size *size)
     int splitIndex;
     int i;
 	int j;
-	int k;
 
 	i = 1;
 	int w = 1;
@@ -151,7 +151,6 @@ char** splitarguments(char **av, t_size *size)
         word_count += count_words(av[w]);
         w++;
     }
-    // printf("%d\n", word_count);
     size->A = word_count;
 	splitIndex = 0;
     splited = (char**)malloc(sizeof(char*) * word_count);
@@ -173,35 +172,28 @@ char** splitarguments(char **av, t_size *size)
                 splitIndex++;
                 j++;
             }
-            k = 0;
-            while (k < j) {
-                free(tokens[k]);
-                k++;
+            while (j > 0) {
+                free(tokens[j]);
+                j--;
             }
             free(tokens);
         }
-
         i++;
     }
     return (splited);
 }
+
 
 int main (int ac, char **av)
 {
     (void)ac;
 	t_stack *stack = malloc(sizeof(t_stack));
 	t_size *size = malloc(sizeof(t_size));
-    if(!size || !stack)
-        exit(1);
 	int i;
 	char **splited = NULL;
     
 	splited = splitarguments(av, size);
-    // for(int i = 0; splited[i]; i++)
-    // {
-    //     printf("%s\n", splited[i]);
-    // }
-	// ft_check_integers(splited);
+	ft_check_integers(splited);
 	size->B = 0;
 	if (size->A <= 1)
         exit(0);
@@ -212,7 +204,7 @@ int main (int ac, char **av)
 	{
 		if (strlen(splited[i]) > 12)
 		{
-			write(2, "numbers are already sorted !!\n", 31);
+			write(2, "Error\n", 6);
 			exit(1);
 		}
 		stack->A[i] = ft_atoi(splited[i]);
@@ -223,14 +215,12 @@ int main (int ac, char **av)
         exit(1);
 	if (size->A <= 5)
 	    ft_small_sort(stack, size);
-        // puts("here");
-	// else if ( size->A <= 100)
-	// 	large_sort(stack, size, 5);
-	// else
-	// 	large_sort(stack, size, 10);
-	// free(stack->A);
-	// free(stack->B);
-	// free(stack->Temp);
-		
+	else if ( size->A <= 100)
+		large_sort(stack, size, 5);
+	else
+		large_sort(stack, size, 10);
+	free(stack->A);
+	free(stack->B);
 	return (0);
 }
+

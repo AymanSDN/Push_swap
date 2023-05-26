@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   small_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asaadane <asaadane@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shifuuu <shifuuu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 16:22:41 by asaadane          #+#    #+#             */
-/*   Updated: 2023/05/25 20:50:25 by asaadane         ###   ########.fr       */
+/*   Updated: 2023/05/26 09:47:37 by shifuuu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void small_to_top(int *stack, int size)
 	int i = 0;
 	int position= 0;
 	
-	// printf("size: %d\n", size);
     int smallest = stack[0];
     while (i < size) {
         if (stack[i] < smallest)
@@ -30,19 +29,18 @@ void small_to_top(int *stack, int size)
     }
 	while(position)
 	{
-		puts("here");
-		if (position / size / 2)
+		if (position > (size / 2))
         {
             while (smallest != stack[0])
             {
-                rrb(stack, size, 1);
+                rra(stack, size, 1);
             }
         }
         else
         {
             while (smallest != stack[0])
             {
-                rb(stack, size, 1);
+                ra(stack, size, 1);
             }
         }
 		position--;
