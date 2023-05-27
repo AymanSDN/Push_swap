@@ -33,12 +33,20 @@ void ft_check_integers(char **splited)
         j = 0;
         while (splited[i][j] != '\0')
         {
-            if (!isdigit(splited[i][j]) && !(splited[i][j] == '-' || splited[i][j] == '+'))
+            if((splited[i][j] == '-' || splited[i][j] == '+') && !isdigit(splited[i][j + 1]))
+            {
+                write(2, "must be only integers\n", 23);
+                exit(1);
+            } 
+            else if (isdigit(splited[i][j]) || (splited[i][j] == '-' || splited[i][j] == '+'))
+            {
+                j++;
+            }
+            else
             {
                 write(2, "must be only integers\n", 23);
                 exit(1);
             }
-            j++;
         }
         i++;
     }
@@ -191,6 +199,7 @@ int main(int ac, char **av)
     if (size->A <= 1)
     {
         free_arguments(splited, size->A);
+        write(2, "Error\n", 7);
         exit (1);
     }
     stack->A = (int *)malloc(sizeof(int) * (size->A + 1));
@@ -238,9 +247,8 @@ int main(int ac, char **av)
     free(stack->B);
     free(stack);
     free(size);
-
-    // puts("-----here-----");
     free_arguments(splited, size->A);
+    
     return 0;
 }
 
