@@ -11,6 +11,7 @@
         "unordered_map": "c",
         "utility": "c",
         "vector": "c",
-        "ctype.h": "c"
+        "ctype.h": "c",
+        "__node_handle": "c"
     }
 }

@@ -50,14 +50,14 @@ void pb(t_stack *stack, t_size *size)
 		stack->B[position_b + 1] = stack->B[position_b];
 		position_b--;
 	} 
-	size->A--;
+	size->B++;
 	stack->B[0] = stack->A[0];
 	while(i < size->A)
 	{
 		stack->A[i] = stack->A[i + 1];
 		i++;
 	}
-	size->B++;
+	size->A--;
 	write(1, "pb\n", 3);
 }
 
@@ -102,7 +102,7 @@ void ra(int *stack_a, int size_a, int p)
 		stack_a[i] = stack_a[i + 1];
 		i++;
 	}
-	stack_a[i -1] = temp;
+	stack_a[i] = temp;
 	if (p == 1)
 		write(1, "ra\n", 3);
 }
