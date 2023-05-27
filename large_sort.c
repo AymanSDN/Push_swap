@@ -1,64 +1,13 @@
 #include "push_swap.h"
 
-int *copy_stack(int *stack_a, int size_a)
-{
-	int i;
-	int *temp;
-	
-	i = 0;
 
-	temp = malloc(sizeof(int) * size_a);
-	if (!temp)
-	{
-		free(temp);
-		exit(1);
-	}
-	while (i < size_a)
-	{
-		temp[i] = stack_a[i];
-		i++;
-	}
-	return(temp);
-}
-
-// int get_smallest(t_stack *stack, t_size *size)
-// {
-// 	int i;
-// 	int smallest;
-
-// 	i = 0;
-// 	smallest = stack->B[0];
-// 	while (i < size->B)
-// 	{
-// 		if (smallest > stack->B[i])
-// 		{
-// 			smallest = stack->B[i];
-// 		}
-// 		i++;
-// 	}
-// 	return (smallest);
-// }
- int get_position(t_stack *stack, t_size *size, int top)
-{
-	int i = 0;
-
-	while (i < size->A)
-	{
-		if (stack->Temp[i] == top)
-			break;
-		i++;
-	}
-	return i;
-}
-
-
-void sort_stack(int *stack, int size_a)
+void stack_indexing(int *stack, int size_a)
 {
     int i;
 	int j;
 	int temp;
-	int *tem;
-	tem = malloc(sizeof(int)* size_a);
+	int *tmp_stack;
+	tmp_stack = malloc(sizeof(int)* size_a);
 	i = 0;
 	temp = 0;
     while (i < size_a)
@@ -71,40 +20,31 @@ void sort_stack(int *stack, int size_a)
 				temp++;
 			j++;
         }
-		tem[i] = temp;
+		tmp_stack[i] = temp;
         i++;
     }
 	i = -1;
     while (++i < size_a)
-		stack[i] = tem[i];
-	free(tem);
+		stack[i] = tmp_stack[i];
+	free(tmp_stack);
 }
 
-// int chanks(t_stack *stack, t_size *size , int range, int mid_range, int count)
-// {
-// 	//int position;
-// 	//position = get_position(stack, size, stack->A[0]);
-// 	if (stack[i] <= stack->Temp[range])
-// 	{
-// 		if (position <= stack->Temp[range - mid_range])
-// 		{
-// 			pb(stack, size);
-// 			count++;
-// 		}
-// 		else
-// 		{
-// 			pb(stack, size);
-// 			rb(stack->B, size->B, 1);
-// 			count++;
-// 		}
-// 	}
-// 	else
-// 	{
-// 		ra(stack->A, size->A, 1);
-// 	}
-// 	// printf("%d\n", position);
-// 	return (count);
-// }
+int get_largest_number(int *stack, int size)
+{
+	int i;
+    int largest = stack[0];
+	i = 1;
+    while (i < size)
+	{
+        if (stack[i] > largest)
+		{
+            largest = stack[i];
+        }
+		i++;
+    }
+
+    return largest;
+}
 
 void large_sort(t_stack *stack, t_size *size, int num)
 {
@@ -113,12 +53,17 @@ void large_sort(t_stack *stack, t_size *size, int num)
 	static int		range;
 	int		mid_range;
 	int		size_range;
+	int largest;
 	
 	i = 0;
 	range = (size->A / num) + (size->A % num);
 	size_range = (size->A / num);
 	mid_range = size_range / 2;
-	sort_stack(stack->A, size->A);
+	stack_indexing(stack->A, size->A);
+	for(int i = 0; i < 100; i++)
+	{
+		printf("stack A: %d | stack B %d\n", stack->A[i], stack->B[i]);
+	}
 	while (size->A)
 	{
 		if (stack->A[0] <= stack->A[range])
@@ -127,11 +72,6 @@ void large_sort(t_stack *stack, t_size *size, int num)
 			{
 				pb(stack, size);
 				count++;
-		for (int i = 0; i < size->B; i++)
-			printf("\n%i\n",stack->B[i]);
-		//exit(0);
-		sleep(2);
-		
 			}
 			else
 			{
@@ -140,34 +80,44 @@ void large_sort(t_stack *stack, t_size *size, int num)
 				count++;
 			}
 		}
-		if(count == range && range <= size->A)
-			range+=mid_range;
 		else
 		{
 			ra(stack->A, size->A, 1);
 		}
+		if(count == size_range && range <= size->A)
+		{
+			range+=mid_range;
+			count = 0;
+		}
 	}
-	free(stack->Temp);
+	for(int i = 0; i < 100; i++)
+	{
+		printf("stack A: %d | stack B %d\n", stack->A[i], stack->B[i]);
+	}
+	while (size->B -1)
+	{
+		largest = get_largest_number(stack->B, size->B);
+
+		if (largest > size->B / 2)
+		{
+			while (largest != stack->B[0])
+			{
+				rrb(stack->B, size->B, 1);
+			}
+		}
+		else
+		{
+			while (largest != stack->B[0])
+			{
+				rb(stack->B, size->B, 1);
+			}
+		}
+		pa(stack, size);
+	}
+	for(int i = 0; i < 100; i++)
+	{
+		printf("stack A: %d | stack B %d\n", stack->A[i], stack->B[i]);
+	}
+	exit(0);
 }
 	
-// while (size->B > 0)
-// 	{
-// 		biggest = get_biggest(stack, size);
-// 		position = get_biggest_position(stack, size, biggest);
-
-// 		if (position > size->B / 2)
-// 		{
-// 			while (biggest != stack->B[0])
-// 			{
-// 				rrb(stack->B, size->B, 1);
-// 			}
-// 		}
-// 		else
-// 		{
-// 			while (biggest != stack->B[0])
-// 			{
-// 				rb(stack->B, size->B, 1);
-// 			}
-// 		}
-// 		pa(stack, size);
-// 	}

@@ -2,8 +2,8 @@ SRCS			= instractions.c parsing.c tools.c small_sort.c large_sort.c
 OBJS			= $(SRCS:.c=.o)
 CC				= cc
 RM				= rm -f
-CFLAGS			= -Wall -Wextra -Werror -g 
-# -fsanitize=address
+CFLAGS			= -Wall -Wextra -Werror 
+# -g -fsanitize=address
 NAME			= push_swap
 
 all:			shifuuu $(NAME)

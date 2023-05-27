@@ -23,16 +23,15 @@ void pa(t_stack *stack, t_size *size)
 	{
 		stack->A[position_a + 1] = stack->A[position_a];
 		position_a--;
-	}
-	stack->A[0] = stack->B[0];
+	} 
 	size->A++;
+	stack->A[0] = stack->B[0];
 	while(i < size->B)
 	{
 		stack->B[i] = stack->B[i + 1];
 		i++;
 	}
 	size->B--;
-	
 	write(1, "pa\n", 3);
 }
 
