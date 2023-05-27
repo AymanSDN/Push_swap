@@ -165,7 +165,7 @@ char **split_arguments(char **av, int *size_A)
 void free_arguments(char **splited, int size_a)
 {
     int i = 0;
-    while (i < size_a -1)
+    while (i < size_a)
     {
         free(splited[i]);
         i++;
@@ -193,21 +193,21 @@ int main(int ac, char **av)
         free_arguments(splited, size->A);
         exit (1);
     }
-    stack->A = (int *)malloc(sizeof(int) * size->A);
+    stack->A = (int *)malloc(sizeof(int) * (size->A + 1));
     if (!stack->A)
     {
         free_arguments(splited, size->A);
         exit (1);
     }
     size->B = 0;
-    stack->B = (int *)malloc(sizeof(int) * size->A);
+    stack->B = (int *)malloc(sizeof(int) * (size->A + 1));
     if (!stack->B)
     {
         free_arguments(splited, size->A);
         exit (1);
     }
     i = 0;
-    while (i < size->A-1)
+    while (i < size->A)
     {
         if (strlen(splited[i]) > 12)
 		{
@@ -231,7 +231,7 @@ int main(int ac, char **av)
     if (size->A <= 5)
 	    ft_small_sort(stack, size);
 	else if ( size->A <= 100)
-		large_sort(stack, size, 9);
+		large_sort(stack, size, 5);
 	else
 		large_sort(stack, size, 11);
     free(stack->A);

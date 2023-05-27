@@ -12,6 +12,8 @@
         "utility": "c",
         "vector": "c",
         "ctype.h": "c",
-        "__node_handle": "c"
-    }
+        "__node_handle": "c",
+        "stack": "c"
+    },
+    "cmake.sourceDirectory": "/Users/asaadane/Desktop/Push_swap/push_swap_visualizer"
 }
