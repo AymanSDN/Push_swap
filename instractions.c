@@ -113,7 +113,7 @@ void rb(int *stack_b, int size_b, int p)
 
 	i = 0;
 	temp = stack_b[0];
-	while (i < size_b)
+	while (i < size_b -1)
 	{
 		stack_b[i] = stack_b[i + 1];
 		i++;

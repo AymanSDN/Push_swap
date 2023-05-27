@@ -52,7 +52,7 @@ void ft_check_duplicate(int *stack_a, int size_a)
 	int j;
 
 	i = 0;
-	while (i < size_a) {
+	while (i < size_a -1) {
 		j =  i + 1;
 		while (j < size_a) {
 			if (stack_a[i] == stack_a[j])
@@ -165,7 +165,7 @@ char **split_arguments(char **av, int *size_A)
 void free_arguments(char **splited, int size_a)
 {
     int i = 0;
-    while (i < size_a)
+    while (i < size_a -1)
     {
         free(splited[i]);
         i++;
@@ -183,7 +183,7 @@ int main(int ac, char **av)
     int i;
     if (ac < 2)
     {
-        fprintf(stderr, "No arguments provided.\n");
+        write(2, "No arguments provided.\n", 24);
         return 1;
     }
     splited = split_arguments(av, &size->A);
@@ -207,7 +207,7 @@ int main(int ac, char **av)
         exit (1);
     }
     i = 0;
-    while (i < size->A)
+    while (i < size->A-1)
     {
         if (strlen(splited[i]) > 12)
 		{
@@ -220,7 +220,7 @@ int main(int ac, char **av)
     ft_check_duplicate(stack->A, size->A);
     if (ft_check_sorted(stack->A, size->A))
     {
-        printf("The input array is already sorted.\n");
+        write(2, "The input array is already sorted.\n", 36);
         free(stack->A);
         free(stack->B);
         free(stack);
@@ -231,13 +231,14 @@ int main(int ac, char **av)
     if (size->A <= 5)
 	    ft_small_sort(stack, size);
 	else if ( size->A <= 100)
-		large_sort(stack, size, 5);
+		large_sort(stack, size, 9);
 	else
 		large_sort(stack, size, 11);
     free(stack->A);
     free(stack->B);
     free(stack);
     free(size);
+
     // puts("-----here-----");
     free_arguments(splited, size->A);
     return 0;
