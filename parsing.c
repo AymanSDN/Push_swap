@@ -19,40 +19,8 @@ int ft_count(char **splited)
 	{
 		i++;
 	}
-	return(i);
-	
+	return(i);	
 }
-
-void ft_check_integers(char **splited)
-{
-    int i = 0;
-    int j;
-
-    while (splited[i] != NULL)
-    {
-        j = 0;
-        while (splited[i][j] != '\0')
-        {
-            if((splited[i][j] == '-' || splited[i][j] == '+') && !isdigit(splited[i][j + 1]))
-            {
-                write(2, "must be only integers\n", 23);
-                exit(1);
-            } 
-            else if (isdigit(splited[i][j]) || (splited[i][j] == '-' || splited[i][j] == '+'))
-            {
-                j++;
-            }
-            else
-            {
-                write(2, "must be only integers\n", 23);
-                exit(1);
-            }
-        }
-        i++;
-    }
-}
-
-
 
 void ft_check_duplicate(int *stack_a, int size_a)
 {
@@ -102,7 +70,7 @@ int count_words(char *arg)
     {
         if (arg[i] == '\0')
         {
-            write(2, "Error\n", 7);
+            write(2, "Error4\n", 7);
             exit(1);
         }
         else if (arg[i] == ' ')
@@ -117,26 +85,26 @@ int count_words(char *arg)
     }
     return count;
 }
+void count_argv(char **av, int *size_a)
+{
+    int i = 1;
+    while(av[i] != NULL)
+    {
+        *size_a += count_words(av[i]);
+        i++;
+    }
+}
 
-char **split_arguments(char **av, int *size_A)
+char **split_arguments(char **av, int *size_a)
 {
     char **splited;
     int spl_index = 0;
     char *arg;
-    size_t i = 1;
+    size_t i;
     size_t j;
-
-    while(av[i] != NULL)
-    {
-        *size_A += count_words(av[i]);
-        i++;
-    }
-
-    splited = (char **)malloc(sizeof(char *) * (*size_A + 1));
-    if (splited == NULL)
-    {
+    splited = (char **)malloc(sizeof(char *) * (*size_a + 1));
+    if (!splited)
         exit(1);
-    }
     i = 1;
     while (av[i] != NULL)
     {
@@ -166,7 +134,6 @@ char **split_arguments(char **av, int *size_A)
         }
         i++;
     }
-
     return splited;
 }
 
@@ -182,74 +149,6 @@ void free_arguments(char **splited, int size_a)
 }
 
 
-int main(int ac, char **av)
-{
 
-    t_stack *stack = malloc(sizeof(t_stack));
-	t_size *size = malloc(sizeof(t_size));
-    char **splited;
-    int i;
-    if (ac < 2)
-    {
-        write(2, "No arguments provided.\n", 24);
-        return 1;
-    }
-    splited = split_arguments(av, &size->A);
-    ft_check_integers(splited);
-    if (size->A <= 1)
-    {
-        free_arguments(splited, size->A);
-        write(2, "Error\n", 7);
-        exit (1);
-    }
-    stack->A = (int *)malloc(sizeof(int) * (size->A + 1));
-    if (!stack->A)
-    {
-        free_arguments(splited, size->A);
-        exit (1);
-    }
-    size->B = 0;
-    stack->B = (int *)malloc(sizeof(int) * (size->A + 1));
-    if (!stack->B)
-    {
-        free_arguments(splited, size->A);
-        exit (1);
-    }
-    i = 0;
-    while (i < size->A)
-    {
-        if (strlen(splited[i]) > 12)
-		{
-			write(2, "Error\n", 7);
-			exit(1);
-		}
-        stack->A[i] = ft_atoi(splited[i]);
-        i++;
-    }
-    ft_check_duplicate(stack->A, size->A);
-    if (ft_check_sorted(stack->A, size->A))
-    {
-        write(2, "The input array is already sorted.\n", 36);
-        free(stack->A);
-        free(stack->B);
-        free(stack);
-        free(size);
-        free_arguments(splited, size->A);
-        exit(1);
-    }
-    if (size->A <= 5)
-	    ft_small_sort(stack, size);
-	else if ( size->A <= 100)
-		large_sort(stack, size, 5);
-	else
-		large_sort(stack, size, 11);
-    free(stack->A);
-    free(stack->B);
-    free(stack);
-    free(size);
-    free_arguments(splited, size->A);
-    
-    return 0;
-}
 
 

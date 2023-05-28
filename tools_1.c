@@ -9,6 +9,16 @@ size_t	ft_strlen(char *s)
 		i++;
 	return (i);
 }
+
+int ft_count_stack(int *stack)
+{
+	int i = 0;
+	while(stack[i])
+	{
+		i++;
+	}
+	return(i);
+}
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
 	size_t	i;
@@ -205,7 +215,7 @@ int	ft_atoi(char *str)
 	}
 	else
 	{
-		write(2, "Error\n", 5);
+		write(2, "Error1\n", 6);
 		exit(1);
 	}
 }

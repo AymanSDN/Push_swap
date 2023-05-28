@@ -1,40 +1,5 @@
 #include "push_swap.h"
 
-
-void small_to_top(int *stack, int size)
-{
-	int i = 0;
-	int position= 0;
-	
-    int smallest = stack[0];
-    while (i < size) {
-        if (stack[i] < smallest)
-		{
-            smallest = stack[i];
-			position = i;
-        }
-		i++;
-    }
-	while(position)
-	{
-		if (position > (size / 2))
-        {
-            while (smallest != stack[0])
-            {
-                rra(stack, size, 1);
-            }
-        }
-        else
-        {
-            while (smallest != stack[0])
-            {
-                ra(stack, size, 1);
-            }
-        }
-		position--;
-	}
-	
-}
 void ft_sort_3(t_stack *stack, t_size *size)
 {
 	//case 1
@@ -84,5 +49,4 @@ void ft_small_sort(t_stack *stack, t_size *size)
 		ft_sort_4(stack, size);
 		pa(stack, size);
 	}
-	
 }

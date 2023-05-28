@@ -1,15 +1,22 @@
-SRCS			= instractions.c parsing.c tools.c small_sort.c large_sort.c
+SRCS			= instractions_a.c \
+					test.c \
+					instractions_both.c \
+					parsing.c \
+					tools_1.c \
+					tools_2.c \
+					small_sort.c \
+					large_sort.c \
+					push_swap.c
 OBJS			= $(SRCS:.c=.o)
 CC				= cc
 RM				= rm -f
-CFLAGS			= -Wall -Wextra -Werror 
-# -g -fsanitize=address
+CFLAGS			= -Wall -Wextra -Werror
 NAME			= push_swap
 
 all:			shifuuu $(NAME)
 				@echo "\033[1m\033[32mCompilation has completed"
 
-$(NAME) : $(OBJS)
+$(NAME) : $(OBJS) push_swap.h
 	@${CC} ${CFLAGS} ${OBJS} -o $(NAME)
 
 clean:

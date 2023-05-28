@@ -1,15 +1,11 @@
 #include "push_swap.h"
 
-
 void stack_indexing(int *stack, int size_a)
 {
     int i;
 	int j;
 	int temp;
 	int *tmp_stack;
-	// for (int i = 0; i < size_a; i++)
-	// 	printf("[%d] ", stack[i]);
-	// printf("\n---");
 	tmp_stack = malloc(sizeof(int)* size_a);
 	i = 0;
 	temp = 0;
@@ -30,10 +26,28 @@ void stack_indexing(int *stack, int size_a)
     while (++i < size_a)
 		stack[i] = tmp_stack[i];
 	free(tmp_stack);
-	// for (int i = 0; i < size_a; i++)
-	// 	printf("[%d] ", stack[i]);
-	// printf("\n");
-	// exit(0);
+}
+
+int get_second_largest_number(int *stack, int size)
+{
+    int largest = stack[0];
+    int second_largest = INT_MIN;
+    int i = 1;
+
+    while (i < size)
+    {
+        if (stack[i] > largest)
+        {
+            second_largest = largest;
+            largest = stack[i];
+        }
+        else if (stack[i] > second_largest && stack[i] < largest)
+        {
+            second_largest = stack[i];
+        }
+        i++;
+    }
+    return second_largest;
 }
 
 int get_largest_number(int *stack, int size)
@@ -49,31 +63,27 @@ int get_largest_number(int *stack, int size)
         }
 		i++;
     }
-
     return largest;
 }
 
-int    get_largest_position(int *stack, int size, int largest)
+int    get_largest_position(int *stack, int size, int number)
 {
     int i = 0;
     while (i < size)
     {
-        if (stack[i] == largest)
+        if (stack[i] == number)
             return (i);
         i++;
     }
     return (0);
 }
 
-void large_sort(t_stack *stack, t_size *size, int num)
+void a_to_b(t_stack *stack, t_size *size, int num)
 {
 	int chunk = (size->A / num) + (size->A % num);
 	int scale_chunk = size->A / num;
 	int half_chunk = scale_chunk / 2;
 	int i = 0;
-	int largest = 0;
-	int largest_position = 0;
-	stack_indexing(stack->A, size->A);
 	while (i < chunk)
 	{
 		if (stack->A[0] <= chunk)
@@ -90,11 +100,19 @@ void large_sort(t_stack *stack, t_size *size, int num)
 				chunk += scale_chunk;
 		}
 	}
+
+}
+
+
+void b_to_a(t_stack *stack, t_size *size)
+{
+	int largest = 0;
+	int largest_position = 0;
 	while (size->B)
 	{
 		largest = get_largest_number(stack->B, size->B);
 		largest_position = get_largest_position(stack->B, size->B, largest);
-		if (largest_position > size->B / 2)
+		if (largest_position >= size->B / 2)
 		{
 			while (largest != stack->B[0])
 			{
@@ -110,5 +128,13 @@ void large_sort(t_stack *stack, t_size *size, int num)
 		}
 		pa(stack, size);
 	}
-	
+
+}
+
+void large_sort(t_stack *stack, t_size *size, int num)
+{
+
+	stack_indexing(stack->A, size->A);
+	a_to_b(stack, size, num);
+	b_to_a(stack, size);
 }
