@@ -1,33 +1,45 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   instractions_a.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: asaadane <asaadane@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/28 16:03:29 by asaadane          #+#    #+#             */
+/*   Updated: 2023/05/28 16:06:14 by asaadane         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-void pa(t_stack *stack, t_size *size)
+void	pa(t_stack *stack, t_size *size)
 {
-	int i;
-	int position_a;
+	int	i;
+	int	position_a;
 
-	if(!size->B)
+	if (!size->b)
 		exit(1);
 	i = 0;
-	position_a = size->A;
+	position_a = size->a;
 	while (position_a >= 0)
 	{
-		stack->A[position_a + 1] = stack->A[position_a];
+		stack->a[position_a + 1] = stack->a[position_a];
 		position_a--;
-	} 
-	size->A++;
-	stack->A[0] = stack->B[0];
-	while(i < size->B)
+	}
+	size->a++;
+	stack->a[0] = stack->b[0];
+	while (i < size->b)
 	{
-		stack->B[i] = stack->B[i + 1];
+		stack->b[i] = stack->b[i + 1];
 		i++;
 	}
-	size->B--;
+	size->b--;
 	write(1, "pa\n", 3);
 }
 
-void sa(int *stack_a, int p)
+void	sa(int *stack_a, int p)
 {
-	int temp;
+	int	temp;
 
 	temp = stack_a[0];
 	stack_a[0] = stack_a[1];
@@ -36,10 +48,10 @@ void sa(int *stack_a, int p)
 		write(1, "sa\n", 3);
 }
 
-void ra(int *stack_a, int size_a, int p)
+void	ra(int *stack_a, int size_a, int p)
 {
-	int i;
-	int temp;
+	int	i;
+	int	temp;
 
 	i = 0;
 	temp = stack_a[0];
@@ -53,8 +65,7 @@ void ra(int *stack_a, int size_a, int p)
 		write(1, "ra\n", 3);
 }
 
-
-void rra(int *stack_a, int size_a, int p)
+void	rra(int *stack_a, int size_a, int p)
 {
 	int	i;
 	int	temp;
@@ -70,30 +81,3 @@ void rra(int *stack_a, int size_a, int p)
 	if (p == 1)
 		write(1, "rra\n", 4);
 }
-
-
-// void pb(t_stack *stack, t_size *size)
-// {
-// 	int i;
-// 	int position_b;
-
-// 	if(!size->A)
-// 		exit(1);
-// 	i = 0;
-// 	position_b = size->B;
-// 	while (position_b >= 0)
-// 	{
-// 		stack->B[position_b + 1] = stack->B[position_b];
-// 		position_b--;
-// 	}
-// 	size->B++;
-// 	stack->B[0] = stack->A[0];
-// 	while(i < size->A)
-// 	{
-// 		stack->A[i] = stack->A[i + 1];
-// 		i++;
-// 	}
-// 	size->A--;
-// 	write(1, "pb\n", 3);
-// }
-

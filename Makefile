@@ -1,12 +1,17 @@
-SRCS			= instractions_a.c \
-					test.c \
+SRCS			=	push_swap.c \
+					instractions_a.c \
+					instractions_b.c \
 					instractions_both.c \
 					parsing.c \
-					tools_1.c \
-					tools_2.c \
+					parsing_2.c \
 					small_sort.c \
 					large_sort.c \
-					push_swap.c
+					tools_1.c \
+					tools_2.c \
+					tools_3.c \
+					tools_4.c 
+# test.c
+
 OBJS			= $(SRCS:.c=.o)
 CC				= cc
 RM				= rm -f

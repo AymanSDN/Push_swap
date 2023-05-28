@@ -1,50 +1,63 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   small_sort.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: asaadane <asaadane@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/28 16:04:08 by asaadane          #+#    #+#             */
+/*   Updated: 2023/05/28 17:28:21 by asaadane         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-void ft_sort_3(t_stack *stack, t_size *size)
+void	ft_sort_3(t_stack *stack, t_size *size)
 {
-	//case 1
-	if (stack->A[0] > stack->A[1] && stack->A[1] < stack->A[2] && stack->A[2] > stack->A[0])
-		sa(stack->A, 1);
-	//case 2
-	else if (stack->A[0] > stack->A[1] && stack->A[1] > stack->A[2]  && stack->A[0] > stack->A[2])
+	int	a;
+	int	b;
+	int	c;
+
+	a = stack->a[0];
+	b = stack->a[1];
+	c = stack->a[2];
+	if (a > b && b < c && c > a)
+		sa(stack->a, 1);
+	else if (a > b && b > c && a > c)
 	{
-		sa(stack->A, 1);
-		rra(stack->A, size->A, 1);
+		sa(stack->a, 1);
+		rra(stack->a, size->a, 1);
 	}
-	//case 3
-	else if (stack->A[0] > stack->A[1] && stack->A[1] < stack->A[2] && stack->A[0] > stack->A[2])
-		ra(stack->A, size->A, 1);
-	//case 4
-	else if (stack->A[0] < stack->A[1] && stack->A[1] > stack->A[2] && stack->A[0] < stack->A[2])
+	else if (a > b && b < c && a > c)
+		ra(stack->a, size->a, 1);
+	else if (a < b && b > c && a < c)
 	{
-		sa(stack->A, 1);
-		ra(stack->A, size->A, 1);
+		sa(stack->a, 1);
+		ra(stack->a, size->a, 1);
 	}
-	//case 5
-	else if (stack->A[0] < stack->A[1] && stack->A[1] > stack->A[2] && stack->A[0] > stack->A[2])
-		rra(stack->A, size->A, 1);
+	else if (a < b && b > c && a > c)
+		rra(stack->a, size->a, 1);
 }
 
-void ft_sort_4(t_stack *stack, t_size *size)
+void	ft_sort_4(t_stack *stack, t_size *size)
 {
-	small_to_top(stack->A, size->A);
+	small_to_top(stack->a, size->a);
 	pb(stack, size);
 	ft_sort_3(stack, size);
 	pa(stack, size);
 }
 
-
-void ft_small_sort(t_stack *stack, t_size *size)
+void	ft_small_sort(t_stack *stack, t_size *size)
 {
-	if(size->A == 2)
-		sa(stack->A, 1);
-	else if(size->A == 3)
+	if (size->a == 2)
+		sa(stack->a, 1);
+	else if (size->a == 3)
 		ft_sort_3(stack, size);
-	else if(size->A == 4)
+	else if (size->a == 4)
 		ft_sort_4(stack, size);
-	else if (size->A == 5)
+	else if (size->a == 5)
 	{
-		small_to_top(stack->A, size->A);
+		small_to_top(stack->a, size->a);
 		pb(stack, size);
 		ft_sort_4(stack, size);
 		pa(stack, size);
