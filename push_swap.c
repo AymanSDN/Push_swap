@@ -6,7 +6,7 @@
 /*   By: asaadane <asaadane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 16:03:52 by asaadane          #+#    #+#             */
-/*   Updated: 2023/05/28 19:43:10 by asaadane         ###   ########.fr       */
+/*   Updated: 2023/05/28 21:20:13 by asaadane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	check_sign(char *splited)
 	int	i;
 
 	i = 0;
-	if (strlen(&splited[i]) > 12)
+	if (ft_strlen(&splited[i]) > 12)
 	{
 		ft_put_error();
 	}
@@ -58,6 +58,7 @@ void	load_stacks(t_stack *stack, t_size *size, char **splited)
 	i = 0;
 	while (i < size->a)
 	{
+		check_sign(splited[i]);
 		stack->a[i] = ft_atoi(splited[i]);
 		i++;
 	}
@@ -95,12 +96,13 @@ int	main(int ac, char **av)
 		exit(1);
 	count_argv(av, &size->a);
 	splited = split_arguments(ac, av, &size->a);
+	check_empty_arg(splited);
+	load_stacks(stack, size, splited);
 	if (size->a <= 1)
 	{
 		free_arguments(splited, size->a);
 		exit (1);
 	}
-	load_stacks(stack, size, splited);
 	ft_check_duplicate(stack->a, size->a);
 	if (ft_check_sorted(stack->a, size->a))
 	{

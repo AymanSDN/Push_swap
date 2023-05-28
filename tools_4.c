@@ -6,29 +6,23 @@
 /*   By: asaadane <asaadane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 18:32:39 by asaadane          #+#    #+#             */
-/*   Updated: 2023/05/28 19:42:31 by asaadane         ###   ########.fr       */
+/*   Updated: 2023/05/28 20:54:26 by asaadane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+void	check_empty_arg(char **splited)
 {
-	size_t	i;
+	int		count;
 
-	i = 0;
-	if (size > 0)
+	count = 0;
+	while (splited[count])
 	{
-		while (src[i] && i < (size - 1))
-		{
-			dst[i] = src[i];
-			i++;
-		}
-		dst[i] = 0;
+		count++;
 	}
-	while (src[i])
-		i++;
-	return (i);
+	if (count == 0)
+		ft_put_error();
 }
 
 int	ft_strncmp(const char *str1, const char *str2, size_t n)

@@ -6,7 +6,7 @@
 /*   By: asaadane <asaadane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 15:32:10 by asaadane          #+#    #+#             */
-/*   Updated: 2023/05/28 19:42:44 by asaadane         ###   ########.fr       */
+/*   Updated: 2023/05/28 21:17:36 by asaadane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,10 @@
 # define PUSH_SWAP_H
 
 # include <stdlib.h>
-# include <stdio.h>
+# include <stdbool.h>
+# include <limits.h>
 # include <unistd.h>
 # include <string.h>
-# include <limits.h>
-# include <ctype.h>
-# include <stdbool.h>
 
 typedef struct s_stack
 {
@@ -61,7 +59,7 @@ void	count_argv(char **av, int *size_a);
 char	**split_arguments(int ac, char **av, int *size_a);
 void	free_arguments(char **splited, int size_a);
 size_t	ft_strlen(char *s);
-size_t	ft_strlcpy(char *dst, const char *src, size_t size);
+void	ft_strncpy(char *dest, const char *src, size_t n);
 int		ft_count_stack(int *stack);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 char	*ft_strdup( char *s);
@@ -69,6 +67,7 @@ char	*ft_strjoin(char *s1, char *s2);
 char	*ft_substr(char *s, size_t start, size_t len);
 char	**ft_split(const char *s, char c);
 int		ft_strncmp(const char *str1, const char *str2, size_t n);
+void	check_empty_arg(char **splited);
 int		ft_atoi(char *str);
 int		get_smallest(int *stack, int size);
 int		get_largest(int *stack, int size);

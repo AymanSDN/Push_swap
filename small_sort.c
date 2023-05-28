@@ -6,7 +6,7 @@
 /*   By: asaadane <asaadane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 16:04:08 by asaadane          #+#    #+#             */
-/*   Updated: 2023/05/28 17:28:21 by asaadane         ###   ########.fr       */
+/*   Updated: 2023/05/28 21:18:52 by asaadane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,22 @@ void	ft_small_sort(t_stack *stack, t_size *size)
 		pb(stack, size);
 		ft_sort_4(stack, size);
 		pa(stack, size);
+	}
+}
+
+void	ft_strncpy(char *dest, const char *src, size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < n && src[i] != '\0')
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	while (i < n)
+	{
+		dest[i] = '\0';
+		i++;
 	}
 }

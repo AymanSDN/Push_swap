@@ -6,7 +6,7 @@
 /*   By: asaadane <asaadane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 16:03:49 by asaadane          #+#    #+#             */
-/*   Updated: 2023/05/28 19:37:05 by asaadane         ###   ########.fr       */
+/*   Updated: 2023/05/28 21:16:01 by asaadane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	splited_elements(char **splited, t_spl *var)
 			free(splited[var->spl_idx]);
 			exit(1);
 		}
-		strncpy(splited[var->spl_idx], var->arg + var->w_srt, var->w_len);
+		ft_strncpy(splited[var->spl_idx], var->arg + var->w_srt, var->w_len);
 		splited[var->spl_idx][var->w_len] = '\0';
 		var->spl_idx++;
 	}
@@ -78,6 +78,7 @@ void	spl_arg(char **av, char **splited)
 			j++;
 		}
 	}
+	free(var);
 }
 
 char	**split_arguments(int ac, char **av, int *size_a)
